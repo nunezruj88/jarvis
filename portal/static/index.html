@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>JARVIS</title>
+  <link rel="stylesheet" href="/base.css">
+  <link rel="stylesheet" href="/hud.css">
+  <script type="module" src="/hud.js"></script>
+</head>
+<body>
+  <div class="hud">
+    <header class="hud-header">
+      <h1>J.A.R.V.I.S.</h1>
+      <time id="clock"></time>
+    </header>
+    <main class="hud-main">
+      <aside class="telemetry" aria-label="Consultas de Home Assistant">
+        <div class="reactor" aria-hidden="true">
+          <div class="orbit o1"></div>
+          <div class="orbit o2"></div>
+          <div class="orbit o3"></div>
+          <div class="core">J</div>
+        </div>
+        <h2>Home Assistant</h2>
+        <div class="readings">
+          <button type="button" data-prompt="¿Cuál es el clima actual?">Clima</button>
+          <button type="button" data-prompt="¿Está encendida la luz Shelly?">Luz Shelly</button>
+          <button type="button" data-prompt="¿Cuánta energía solar hay acumulada?">Energía solar</button>
+          <button type="button" data-prompt="¿Cuál es la temperatura del circuito de calefacción?">Calefacción</button>
+        </div>
+        <p>Consultas de solo lectura</p>
+      </aside>
+      <section class="console" aria-labelledby="chat-title">
+        <div class="console-header">
+          <h2 id="chat-title">Conversación</h2>
+          <button type="button" id="clear">Nueva conversación</button>
+        </div>
+        <div id="messages" role="log" aria-live="polite"></div>
+        <p id="status" role="status"></p>
+        <form id="chat">
+          <label class="sr-only" for="input">Mensaje para JARVIS</label>
+          <textarea id="input" rows="2" maxlength="6000" placeholder="Escribe a JARVIS…" required></textarea>
+          <button id="send" type="submit">Enviar</button>
+        </form>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

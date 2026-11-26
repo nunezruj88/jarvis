@@ -1,0 +1,54 @@
+services:
+  ollama:
+    image: ollama/ollama:${OLLAMA_TAG:-latest}
+    volumes:
+      - models:/root/.ollama
+    restart: unless-stopped
+
+  litellm:
+    image: ghcr.io/berriai/litellm:${LITELLM_TAG:-v1.111.0}
+    command: ["--config", "/app/config.yaml", "--port", "4000"]
+    environment:
+      LITELLM_KEY: ${LITELLM_KEY:?Define LITELLM_KEY en .env}
+      MOONSHOT_API_KEY: ${MOONSHOT_API_KEY:-}
+      OLLAMA_MODEL: ollama_chat/${OLLAMA_MODEL:-qwen2.5:3b}
+    volumes:
+      - ./portal/${LITELLM_CONFIG:-litellm.yaml}:/app/config.yaml:ro
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  ha-bridge:
+    build:
+      context: .
+      dockerfile: portal/Dockerfile
+    command: ["uvicorn", "bridge:app", "--host", "0.0.0.0", "--port", "8090"]
+    environment:
+      HA_URL: ${HA_URL:-}
+      HA_TOKEN: ${HA_TOKEN:-}
+      HA_WEATHER: ${HA_WEATHER:-}
+      HA_LIGHT: ${HA_LIGHT:-}
+      HA_SOLAR: ${HA_SOLAR:-}
+      HA_HEATING: ${HA_HEATING:-}
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: portal/Dockerfile
+    environment:
+      LITELLM_KEY: ${LITELLM_KEY:?Define LITELLM_KEY en .env}
+      JARVIS_MODEL: ${JARVIS_MODEL:-local}
+      HISTORY_DB: /data/history.sqlite3
+    ports:
+      - "127.0.0.1:${JARVIS_PORT:-8010}:8000"
+    volumes:
+      - history:/data
+    depends_on:
+      - litellm
+      - ha-bridge
+    restart: unless-stopped
+
+volumes:
+  models:
+  history:

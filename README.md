@@ -1,5 +1,7 @@
 # JARVIS · prototipo local de chat
 
+Para ejecutar **JARVIS local con Docker**, consulta la [guía de Ollama, LiteLLM, FastAPI y el portal HUD](portal/README.md).
+
 Asistente en español con interfaz inspirada en JARVIS, proveedor/modelo configurables, consulta meteorológica y Home Assistant de solo lectura. Windows o Linux con Node.js 22 o posterior. El proyecto utiliza los módulos incluidos en Node.js; no necesita descargar paquetes npm para arrancar.
 
 ## Prerrequisitos

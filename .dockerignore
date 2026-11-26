@@ -1,0 +1,9 @@
+**
+!portal/
+!portal/backend.py
+!portal/bridge.py
+!portal/requirements.txt
+!portal/static/
+!portal/static/**
+!public/
+!public/style.css
