@@ -2,13 +2,12 @@
 
 Para ejecutar **JARVIS local con Docker**, consulta la [guía de Ollama, LiteLLM, FastAPI y el portal HUD](portal/README.md).
 
-Asistente en español con interfaz inspirada en JARVIS, proveedor/modelo configurables, consulta meteorológica y Home Assistant de solo lectura. Windows o Linux con Node.js 22 o posterior. El proyecto utiliza los módulos incluidos en Node.js; no necesita descargar paquetes npm para arrancar.
+Asistente en español con interfaz inspirada en JARVIS, proveedor/modelo configurables, consulta meteorológica y Home Assistant de solo lectura. El prototipo funciona en Linux con Node.js 22 o posterior. El proyecto utiliza los módulos incluidos en Node.js; no necesita descargar paquetes npm para arrancar.
 
 ## Prerrequisitos
 
 ### Sistema operativo y equipo
 
-- **Windows:** Windows 11 de 64 bits con escritorio.
 - **Linux:** Ubuntu Desktop 24.04 LTS de 64 bits como entorno recomendado para el mini PC. Otras distribuciones pueden servir si admiten Node.js y un navegador moderno, pero esta guía utiliza Ubuntu.
 - **Hardware:** mini PC Intel N150 o Intel i5 con 16 GB de RAM y SSD, como equipo de referencia para este proyecto. La IA se ejecuta en la nube; no se necesita GPU dedicada ni descargar modelos locales. Estas referencias no son mínimos de hardware medidos.
 - **Interfaz:** pantalla y teclado, o teclado en pantalla si el sistema ya lo tiene configurado. Micrófono, altavoces y cámara no son necesarios para esta versión de chat.
@@ -35,45 +34,6 @@ No son necesarios Python, Docker, Pipecat, Ollama, una base de datos externa ni 
 - URL base de la API de IA, clave y nombre exacto del modelo. Una suscripción a una aplicación de chat no sustituye una clave de API.
 - Localidad y coordenadas para la consulta meteorológica. Open-Meteo no requiere clave en la integración actual.
 - Puerto local **3210** libre. JARVIS escucha únicamente en `127.0.0.1`: el navegador debe abrirse en el mismo equipo que ejecuta el servidor. No necesitas abrir ese puerto al exterior ni configurar CORS en Home Assistant; las consultas se hacen desde el servidor local.
-
-## Instalación en Windows
-
-### 1. Instalar Node.js
-
-1. Abre la [página oficial de Node.js](https://nodejs.org/en/download).
-2. Selecciona **Node.js 24 LTS**, Windows y arquitectura **x64**, y descarga el instalador `.msi`.
-3. Ejecuta el instalador manteniendo la opción de añadir Node.js a `PATH`. Las herramientas adicionales de compilación no son necesarias para este proyecto.
-4. Abre una **nueva** ventana de PowerShell y comprueba la instalación:
-
-```powershell
-node --version
-```
-
-Debe mostrar `v24.x.x`, o una versión admitida igual o superior a 22. Si no reconoce `node`, cierra y vuelve a abrir la terminal después de instalarlo.
-
-### 2. Descargar el proyecto
-
-1. Abre [nunezruj88/jarvis](https://github.com/nunezruj88/jarvis).
-2. Pulsa **Code → Download ZIP** y extrae todo el contenido en una carpeta de tu usuario, por ejemplo `Documentos\jarvis`. No lo ejecutes desde dentro del ZIP.
-3. Comprueba que la carpeta extraída contiene `server.mjs`, `package.json`, `public` y `test`.
-
-Si prefieres Git, instala [Git for Windows](https://git-scm.com/downloads/win), abre una nueva terminal en la carpeta donde quieras guardar el proyecto y ejecuta:
-
-```powershell
-git clone https://github.com/nunezruj88/jarvis.git
-cd jarvis
-```
-
-### 3. Comprobar y arrancar
-
-Abre PowerShell dentro de la carpeta que contiene `server.mjs` y ejecuta:
-
-```powershell
-node --test
-node server.mjs
-```
-
-Las pruebas no usan tus credenciales ni consumen API de IA. Si pasan, el segundo comando mostrará `JARVIS disponible en http://127.0.0.1:3210`. Deja la terminal abierta y visita esa dirección en el navegador. Para los siguientes arranques también puedes hacer doble clic en `iniciar.cmd`.
 
 ## Instalación en Ubuntu Desktop
 
@@ -153,7 +113,7 @@ Abre una terminal en esta carpeta y ejecuta:
 node server.mjs
 ```
 
-Abre http://127.0.0.1:3210 en tu navegador. En Windows puedes utilizar `iniciar.cmd`. En Linux puedes ejecutar `sh iniciar.sh`. Para una mini pantalla, activa pantalla completa en el navegador. El servidor solo escucha en este equipo; Home Assistant puede estar en otro PC de la misma red. Para detenerlo, pulsa Ctrl+C en la terminal.
+Abre http://127.0.0.1:3210 en tu navegador. Para iniciarlo también puedes ejecutar `sh iniciar.sh`. Para una mini pantalla, activa pantalla completa en el navegador. El servidor solo escucha en este equipo; Home Assistant puede estar en otro PC de la misma red. Para detenerlo, pulsa Ctrl+C en la terminal.
 
 ## Configuración desde Ajustes
 
