@@ -1,0 +1,11 @@
+model_list:
+  - model_name: local
+    litellm_params:
+      model: os.environ/OLLAMA_MODEL
+      api_base: http://ollama:11434
+  - model_name: kimi
+    litellm_params:
+      model: moonshot/kimi-k2.5
+      api_key: os.environ/MOONSHOT_API_KEY
+general_settings:
+  master_key: os.environ/LITELLM_KEY
